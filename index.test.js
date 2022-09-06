@@ -1,4 +1,4 @@
-import Ship from './index';
+import Ship from './ship';
 
 test('ship factory works', () => {
     expect(Ship(4).sections).toEqual([1, 1, 1, 1]);
