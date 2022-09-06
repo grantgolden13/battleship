@@ -1,3 +1,5 @@
+import Ship from './ship.js';
+
 export default Gameboard;
 
 function Gameboard() {
@@ -13,7 +15,8 @@ function Gameboard() {
         [0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [5, 6], [6, 6]
     ];
 
-    gameboard.placeShip = function(coords, length) {
+    gameboard.placeShip = function(coords, ship) {
+        let length = ship.sections.length;
         let startLocation;
         for (let item of gameboard.board) {
             if (item[0] == coords[0]) {
@@ -24,7 +27,7 @@ function Gameboard() {
                         gameboard.board[startLocation + i] = "X";
                     }
                     return gameboard.board;
-                } 
+                }
             }
         }
         return gameboard.board;
@@ -32,3 +35,10 @@ function Gameboard() {
 
     return gameboard;
 }
+
+const testBoard = Gameboard();
+const testShip = Ship(4);
+
+testBoard.placeShip([0, 2], testShip);
+
+console.log(testBoard);
