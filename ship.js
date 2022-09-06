@@ -7,11 +7,9 @@ function Ship(length) {
 
     ship.hit = function(index) {
         if (index > ship.sections.length || index < 0) {
-            console.log("missed");
             return ship.sections;
         } else {
             ship.sections[index] = "hit";
-            console.log("we've been hit!");
             return ship.sections;
         }
     }
