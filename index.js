@@ -17,12 +17,11 @@ function Ship(length) {
     }
 
     ship.isSunk = function() {
-        for (let section of ship.sections) {
-            if (section !== "hit") {
-                return false;
-            } else {
-                return true;
-            }
+        const areNotHit = (element) => element !== "hit";
+        if (ship.sections.some(areNotHit)) {
+            return false;
+        } else {
+            return true;
         }
     }
 
