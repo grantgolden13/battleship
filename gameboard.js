@@ -15,22 +15,35 @@ function Gameboard() {
         [0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [5, 6], [6, 6]
     ];
 
+    gameboard.misses = [];
+
     gameboard.placeShip = function(coords, ship) {
         let length = ship.sections.length;
         let startLocation;
         for (let item of gameboard.board) {
-            if (item[0] == coords[0]) {
-                if (item[1] == coords[1]) {
-                    startLocation = gameboard.board.indexOf(item);
-                    gameboard.board[startLocation] = "X";
-                    for (let i = (length - 1); i > 0; i--) {
-                        gameboard.board[startLocation + i] = "X";
-                    }
-                    return gameboard.board;
+            if (item[0] == coords[0] && item[1] == coords[1]) {
+                startLocation = gameboard.board.indexOf(item);
+                gameboard.board[startLocation].push("X");
+                for (let i = (length - 1); i > 0; i--) {
+                    gameboard.board[startLocation + i].push("X");
                 }
+                return gameboard.board;
             }
         }
         return gameboard.board;
+    }
+
+    gameboard.receiveAttack = function(coords) {
+        let result;
+        for (let item of gameboard.board) {
+            if (item[0] == coords[0] && item[1] == coords[1]) {
+                if (item[2] == "X") {
+                    item[2] = "O";
+                    result = "hit!";
+                }
+                return result;
+            }
+        }
     }
 
     return gameboard;
@@ -39,6 +52,8 @@ function Gameboard() {
 const testBoard = Gameboard();
 const testShip = Ship(4);
 
-testBoard.placeShip([0, 2], testShip);
+testBoard.placeShip([2, 4], testShip);
 
-console.log(testBoard);
+testBoard.receiveAttack([3, 4]);
+
+console.log(testBoard)
