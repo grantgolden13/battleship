@@ -20,12 +20,15 @@ function Gameboard() {
     gameboard.placeShip = function(coords, ship) {
         let length = ship.sections.length;
         let startLocation;
+        let pointer = ship;
         for (let item of gameboard.board) {
             if (item[0] == coords[0] && item[1] == coords[1]) {
                 startLocation = gameboard.board.indexOf(item);
                 gameboard.board[startLocation].push("X");
-                for (let i = (length - 1); i > 0; i--) {
+                gameboard.board[startLocation].push([pointer, 0])
+                for (let i = 1; i < length; i++) {
                     gameboard.board[startLocation + i].push("X");
+                    gameboard.board[startLocation + i].push([pointer, i]);
                 }
                 return gameboard.board;
             }
@@ -39,11 +42,32 @@ function Gameboard() {
             if (item[0] == coords[0] && item[1] == coords[1]) {
                 if (item[2] == "X") {
                     item[2] = "O";
+                    let ship = item[3][0];
+                    let hitIndex = item[3][1];
+                    ship.hit(hitIndex);
                     result = "hit!";
                 }
-                return result;
             }
         }
+        if (result == null || result == undefined) {
+            gameboard.misses.push(coords);
+            result = "missed";
+        }
+        return result;
+    }
+
+    gameboard.allSunk = function() {
+        let ships = [];
+        for (let item of gameboard.board) {
+            if (item[2] == "X" || item[2] == "O") {
+                if (ships.includes(item[3][0]) !== true) {
+                    ships.push(item[3][0]);
+                }
+            }
+        }
+        const areSunk = (ship) => ship.isSunk() == true;
+        const sunkenShips = ships.every(areSunk);
+        return sunkenShips;
     }
 
     return gameboard;
