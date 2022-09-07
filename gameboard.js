@@ -48,12 +48,3 @@ function Gameboard() {
 
     return gameboard;
 }
-
-const testBoard = Gameboard();
-const testShip = Ship(4);
-
-testBoard.placeShip([2, 4], testShip);
-
-testBoard.receiveAttack([3, 4]);
-
-console.log(testBoard)
