@@ -34,7 +34,7 @@ test('gameboard properly receives missed attack', () => {
     expect(testBoard.receiveAttack([0, 4])).toBe('missed');
 });
 
-test('gameboard properly receives missed attack', () => {
+test('gameboard properly records missed attack', () => {
     const testBoard = Gameboard();
     const testShip = Ship(4);
 
