@@ -1,0 +1,18 @@
+body {
+    display: flex;
+    justify-content: center;
+    gap: 25vw;
+}
+
+.grid1,
+.grid2 {
+    display: grid;
+    grid-template-columns: repeat(10, 48px);
+}
+
+.grid1 div,
+.grid2 div {
+    height: 48px;
+    width: 48px;
+    border: 1px solid black;
+}
