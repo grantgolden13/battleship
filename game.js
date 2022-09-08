@@ -9,24 +9,40 @@ function Game() {
 
     game.gameboard1 = Gameboard();
     game.gameboard2 = Gameboard();
-    game.player1 = Player('player1');
-    game.player2 = Player('player2');
+    game.player1 = Player();
+    game.player2 = Player();
     
-    const boardSquares1 = document.querySelectorAll('.grid1 div');
+    const boardSquares1 = Array.from(document.querySelectorAll('.grid1 div'));
     boardSquares1.forEach((square) => {
-        changeColor(square);
+        square.addEventListener('click', (e) => {
+            const index = boardSquares1.indexOf(square);
+            const coords = game.gameboard1.board[index]
+            const result = game.gameboard1.receiveAttack(coords);
+            if (result == "hit!") {
+                square.style.backgroundColor = 'red';
+            } else if (result == "missed") {
+                square.style.backgroundColor = 'lightgreen';
+            }
+            console.log(result);
+        });
     });
 
-    const boardSquares2 = document.querySelectorAll('.grid2 div');
+    const boardSquares2 = Array.from(document.querySelectorAll('.grid2 div'));
     boardSquares2.forEach((square) => {
-        changeColor(square);
+        square.addEventListener('click', (e) => {
+            const index = boardSquares2.indexOf(square);
+            const coords = game.gameboard2.board[index]
+            const result = game.gameboard2.receiveAttack(coords);
+            if (result == "hit!") {
+                square.style.backgroundColor = 'red';
+            } else if (result == "missed") {
+                square.style.backgroundColor = 'lightgreen';
+            }
+            console.log(result);
+        });
     });
-}
 
-function changeColor(square) {
-    square.addEventListener('click', () => {
-        square.style.backgroundColor = 'lightgreen';
-    });
+    return game;
 }
 
 Game();
