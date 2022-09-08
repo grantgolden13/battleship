@@ -2,10 +2,9 @@ import Gameboard from './gameboard.js';
 
 export default Player;
 
-function Player(name) {
+function Player() {
     const player = {};
 
-    player.name = name;
     player.attackedCoords = [];
 
     player.randomAttack = function(enemyGameboard) {
