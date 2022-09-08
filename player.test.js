@@ -18,11 +18,18 @@ test('attack works on hit', () => {
     expect(player1.attack([2, 4], testBoard)).toBe("hit!");
 });
 
-test('attack works on hit', () => {
+test('attack works on hit in different place', () => {
     const testBoard = Gameboard();
     const player1 = Player('player1');
     const testShip = Ship(2);
     testBoard.placeShip([2, 4], testShip);
     
     expect(player1.attack([3, 4], testBoard)).toBe("hit!");
+});
+
+test('computers random attack works', () => {
+    const testBoard = Gameboard();
+    const player1 = Player('player1');
+
+    expect(player1.randomAttack(testBoard)).toBe("missed")
 });
