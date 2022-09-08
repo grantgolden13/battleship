@@ -9,8 +9,8 @@ function Game() {
 
     game.gameboard1 = Gameboard();
     game.gameboard2 = Gameboard();
-    game.player1 = Player();
-    game.player2 = Player();
+    game.player = Player();
+    game.computer = Player();
     
     const boardSquares1 = Array.from(document.querySelectorAll('.grid1 div'));
     boardSquares1.forEach((square) => {
