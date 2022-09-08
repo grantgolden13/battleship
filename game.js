@@ -7,17 +7,17 @@ export default Game;
 function Game() {
     const game = {};
 
-    game.gameboard1 = Gameboard();
-    game.gameboard2 = Gameboard();
+    game.playerGameboard = Gameboard();
+    game.computerGameboard = Gameboard();
     game.player = Player();
     game.computer = Player();
     
-    const boardSquares1 = Array.from(document.querySelectorAll('.grid1 div'));
-    boardSquares1.forEach((square) => {
+    const playerSquares = Array.from(document.querySelectorAll('.grid1 div'));
+    playerSquares.forEach((square) => {
         square.addEventListener('click', (e) => {
-            const index = boardSquares1.indexOf(square);
-            const coords = game.gameboard1.board[index]
-            const result = game.gameboard1.receiveAttack(coords);
+            const index = playerSquares.indexOf(square);
+            const coords = game.playerGameboard.board[index]
+            const result = game.playerGameboard.receiveAttack(coords);
             if (result == "hit!") {
                 square.style.backgroundColor = 'red';
             } else if (result == "missed") {
@@ -27,12 +27,12 @@ function Game() {
         });
     });
 
-    const boardSquares2 = Array.from(document.querySelectorAll('.grid2 div'));
-    boardSquares2.forEach((square) => {
+    const computerSquares = Array.from(document.querySelectorAll('.grid2 div'));
+    computerSquares.forEach((square) => {
         square.addEventListener('click', (e) => {
-            const index = boardSquares2.indexOf(square);
-            const coords = game.gameboard2.board[index]
-            const result = game.gameboard2.receiveAttack(coords);
+            const index = computerSquares.indexOf(square);
+            const coords = game.computerGameboard.board[index]
+            const result = game.computerGameboard.receiveAttack(coords);
             if (result == "hit!") {
                 square.style.backgroundColor = 'red';
             } else if (result == "missed") {
